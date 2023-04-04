@@ -4,6 +4,7 @@ import usePow from "./usePow";
 import MockMemo from "./useCallback/index";
 import RefComponent from './useRef/index'
 import useCreation from "./useCreation";
+import useUpdate from "./useUpdate";
 
 /*
 first version
@@ -61,17 +62,29 @@ useRef version
 /*
 useCreation version
 **/
+// const DocsPage = () => {
+//   const [,setFlag]  = useState<boolean>(false)
+//   const getNowData = ()=>{
+//     return Math.random()
+//   }
+//   const nowData = useCreation(()=>getNowData(),[])
+//   return (
+//     <div style={{padding:50}}>
+//       <div>正常的函数： {getNowData()}</div>
+//       <div>useCreation包裹后的:{nowData}</div>
+//       <div onClick={()=>{setFlag(v=>!v)}}>渲染</div>
+//     </div>
+//   );
+// };
+/*
+useCreation version
+**/
 const DocsPage = () => {
-  const [,setFlag]  = useState<boolean>(false)
-  const getNowData = ()=>{
-    return Math.random()
-  }
-  const nowData = useCreation(()=>getNowData(),[])
+  const update = useUpdate()
   return (
     <div style={{padding:50}}>
-      <div>正常的函数： {getNowData()}</div>
-      <div>useCreation包裹后的:{nowData}</div>
-      <div onClick={()=>{setFlag(v=>!v)}}>渲染</div>
+     <div>时间：{Date.now()}</div>
+     <div onClick={update}>更新时间</div>
     </div>
   );
 };
