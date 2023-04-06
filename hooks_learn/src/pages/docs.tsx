@@ -5,6 +5,7 @@ import MockMemo from "./useCallback/index";
 import RefComponent from './useRef/index'
 import useCreation from "./useCreation";
 import useUpdate from "./useUpdate";
+import useReactive from "./useReactive";
 
 /*
 first version
@@ -79,13 +80,46 @@ useCreation version
 /*
 useCreation version
 **/
+// const DocsPage = () => {
+//   const update = useUpdate()
+//   return (
+//     <div style={{padding:50}}>
+//      <div>时间：{Date.now()}</div>
+//      <div onClick={update}>更新时间</div>
+//     </div>
+//   );
+// };
+
+/*
+useCreation version
+**/
 const DocsPage = () => {
-  const update = useUpdate()
+  const state = useReactive<any>({
+    count: 0,
+    name: '小杜杜',
+    flag: true,
+    arr: [],
+    bugs: ['小杜杜', 'react', 'hook'],
+    addBug(bug:string) {
+      this.bugs.push(bug);
+    },
+    get bugsCount() {
+      return this.bugs.length;
+    },
+  })
+
   return (
-    <div style={{padding:50}}>
-     <div>时间：{Date.now()}</div>
-     <div onClick={update}>更新时间</div>
+    <div style={{padding: 20}}>
+      <div style={{fontWeight: 'bold'}}>基本使用：</div>
+       <div style={{marginTop: 8}}> 对数字进行操作：{state.count}</div>
+       <div style={{margin: '8px 0', display: 'flex',justifyContent: 'flex-start'}}>
+         <div color='primary' onClick={() => {state.count++;console.log(1)} } >加1</div>
+         <div color='primary' style={{marginLeft: 8}} onClick={() => state.count-- } >减1</div>
+         <div color='primary' style={{marginLeft: 8}} onClick={() => state.count = 7 } >设置为7</div>
+       </div>
     </div>
   );
+
+
 };
 export default DocsPage;
