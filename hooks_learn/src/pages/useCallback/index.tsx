@@ -1,6 +1,20 @@
 import React, { useCallback, useState } from "react";
 
-const TestButton = React.memo((props: any) => {
+// const TestButton = React.memo((props: any) => {
+//   console.log(props.title);
+//   return (
+//     <div
+//       onClick={props.onClick}
+//       style={props.title === "useCallback点击" ? { marginLeft: 20 } : undefined}
+//     >
+//       {props.title}
+//     </div>
+//   );
+// });
+/**
+ * 不用memo包裹
+*/
+const TestButton = (props: any) => {
   console.log(props.title);
   return (
     <div
@@ -10,7 +24,7 @@ const TestButton = React.memo((props: any) => {
       {props.title}
     </div>
   );
-});
+};
 
 const MockMemo: React.FC<any> = () => {
   const [count, setCount] = useState(0);
